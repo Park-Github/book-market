@@ -1,0 +1,9 @@
+#name {
+    min-height: 70px;
+    max-height: 70px;
+}
+
+#description {
+    min-height: 100px;
+    max-height: 100px;
+}

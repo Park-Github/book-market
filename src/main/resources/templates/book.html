@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <title>Book Info</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Home</a>
+    </div>
+</nav>
+
+<div class="container-fluid bg-light p-5 mb-4">
+    <div class="container">
+        <h1 class="display-3">Book Info</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 th:text="${book.name}">Name placeholder</h3>
+            <p th:utext="${book.description}">Description placeholder</p>
+            <br>
+            <p><b>Code: </b><span class="badge bg-info" th:text="${book.id}"></span></p>
+            <p><b>Author: </b> [(${book.author})]</p>
+            <p><b>Publisher: </b> [(${book.publisher})]</p>
+            <p><b>Release: </b> [(${book.releaseDate})]</p>
+            <p><b>Category: </b> [(${book.category})]</p>
+            <p><b>Stocks left: </b> [(${book.stock})]</p>
+            <h4 th:text="'&#x20A9;' + ${#numbers.formatInteger(book.price,1,'DEFAULT')}">Price placeholder</h4>
+            <br>
+            <p>
+                <a class="btn btn-primary me-2" href="#">Order</a>
+                <a class="btn btn-secondary" href="/books">Browse</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<footer class="container">
+    <hr>
+    <p>&copy; WebMarket</p>
+</footer>
+
+</body>
+</html>

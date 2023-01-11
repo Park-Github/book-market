@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="/css/books.css" rel="stylesheet"/>
+  <title>Library</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">Home</a>
+  </div>
+</nav>
+
+<div class="container-fluid bg-light p-5 mb-4">
+  <div class="container">
+    <h1 class="display-3">List of Books</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row" style="justify-content: center">
+    <div th:each="book : ${bookList}" class="col-md-4">
+      <h3 id="name" th:text="${#strings.abbreviate(book.name, 30)}"></h3>
+      <p>
+        [(${book.author})]<br>
+        [(${book.publisher})] | [(${book.releaseDate})]
+      </p>
+      <p id="description">
+        [(${#strings.abbreviate(book.description, 120)})]
+      </p>
+      <p class="d-flex justify-content-center">&#x20A9;[(${#numbers.formatInteger(book.price,1,'DEFAULT')})]</p>
+      <p>
+        <a class="btn btn-primary d-grid col-3 mx-auto" href="book.html" th:href="@{/book(id=${book.id})}">View</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<footer class="container">
+  <hr>
+  <p>&copy; WebMarket</p>
+</footer>
+
+</body>
+</html>
