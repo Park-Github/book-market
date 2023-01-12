@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <script src="/js/member-register.js"></script>
+  <title>Create an account</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">Home</a>
+  </div>
+</nav>
+
+<div class="container-fluid bg-light p-5 mb-4">
+  <div class="container">
+    <h1 class="display-3">New account</h1>
+  </div>
+</div>
+
+<div class="container">
+  <form method="post">
+    <div class="mb-3">
+      <label class="col-form-label" for="id">ID</label>
+      <div class="col-sm-3">
+        <input class="form-control" type="text" id="id" name="id" aria-describedby="id-feedback" required>
+        <div id="id-feedback" class="invalid-feedback"></div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="col-form-label" for="pwd">Password</label>
+      <div class="col-sm-3">
+        <input class="form-control" type="password" id="pwd" name="password" required>
+        <div class="invalid-feedback">Too short password!</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="col-form-label" for="res">Residence</label>
+      <div class="col-sm-3">
+        <select class="form-select" id="res" name="residence">
+          <optgroup label="City">
+            <option>Seoul</option>
+            <option>Busan</option>
+            <option>Daegu</option>
+            <option>Incheon</option>
+            <option>Gwangju</option>
+            <option>Daejeon</option>
+            <option>Ulsan</option>
+            <option>Sejong</option>
+          </optgroup>
+          <optgroup label="Province">
+            <option>Gyeonggi</option>
+            <option>Gangwon</option>
+            <option>North. Chungcheong</option>
+            <option>South. Chungcheong</option>
+            <option>North. Jeolla</option>
+            <option>South. Jeolla</option>
+            <option>North. Gyeongsang</option>
+            <option>South. Gyeongsang</option>
+            <option>Jeju</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="mb-1">Sex</label>
+      <div>
+        <span class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="male" name="sex" value="0" checked="checked">
+        <label class="form-check-label" for="male">Male</label>
+      </span>
+        <span class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="female" name="sex" value="1">
+        <label class="form-check-label" for="female">Female</label>
+      </span>
+        <span class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="other" name="sex" value="2">
+        <label class="form-check-label" for="other">Other</label>
+      </span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="mb-1">Hobby (optional)</label>
+      <div>
+        <span class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="reading" name="hobbies" value="reading">
+        <label class="form-check-label" for="reading">Reading</label>
+      </span>
+        <span class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="exercise" name="hobbies" value="exercise">
+        <label class="form-check-label" for="exercise">Exercise</label>
+      </span>
+        <span class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="gaming" name="hobbies" value="gaming">
+        <label class="form-check-label" for="gaming">Gaming</label>
+      </span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <button type="submit" id="form-submit-btn" class="btn btn-primary me-2">Register</button>
+      <button type="reset" id="form-reset-btn" class="btn btn-danger">Reset</button>
+    </div>
+  </form>
+</div>
+
+<hr>
+<footer class="container">
+  <p>&copy; BookMarket</p>
+</footer>
+
+</body>
+</html>
