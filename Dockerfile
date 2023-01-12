@@ -5,6 +5,7 @@ COPY build.gradle ./build.gradle
 COPY gradlew ./gradlew
 COPY gradle ./gradle
 COPY src ./src
+RUN chmod u+x ./gradlew
 RUN ./gradlew build
 
 CMD ["./gradlew", "bootRun"]
