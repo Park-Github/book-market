@@ -39,7 +39,8 @@
     <div class="mb-3">
       <label class="col-form-label" for="res">Residence</label>
       <div class="col-sm-3">
-        <select class="form-select" id="res" name="residence">
+        <select class="form-select" id="res" name="residence" required>
+            <option value="">Select your region</option>
           <optgroup label="City">
             <option>Seoul</option>
             <option>Busan</option>
@@ -68,36 +69,37 @@
       <label class="mb-1">Sex</label>
       <div>
         <span class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" id="male" name="sex" value="0" checked="checked">
+        <input class="form-check-input" type="radio" id="male" name="sex" value="0" required>
         <label class="form-check-label" for="male">Male</label>
       </span>
         <span class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" id="female" name="sex" value="1">
+        <input class="form-check-input" type="radio" id="female" name="sex" value="1" required>
         <label class="form-check-label" for="female">Female</label>
       </span>
         <span class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" id="other" name="sex" value="2">
+        <input class="form-check-input" type="radio" id="other" name="sex" value="2" required>
         <label class="form-check-label" for="other">Other</label>
       </span>
       </div>
     </div>
-    <div class="mb-3">
-      <label class="mb-1">Hobby (optional)</label>
-      <div>
+    <fieldset class="border bg-light mb-3 col-sm-3">
+      <legend class="ms-1 fs-6">Optional field</legend>
+      <label class="ms-3 mb-1">Hobby</label>
+      <div class="ms-3">
         <span class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="reading" name="hobbies" value="reading">
-        <label class="form-check-label" for="reading">Reading</label>
-      </span>
-        <span class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="exercise" name="hobbies" value="exercise">
-        <label class="form-check-label" for="exercise">Exercise</label>
-      </span>
-        <span class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="gaming" name="hobbies" value="gaming">
-        <label class="form-check-label" for="gaming">Gaming</label>
-      </span>
+          <input class="form-check-input" type="checkbox" id="reading" name="hobbies" value="reading">
+          <label class="form-check-label" for="reading">Reading</label>
+        </span>
+          <span class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="exercise" name="hobbies" value="exercise">
+          <label class="form-check-label" for="exercise">Exercise</label>
+        </span>
+          <span class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="gaming" name="hobbies" value="gaming">
+          <label class="form-check-label" for="gaming">Gaming</label>
+        </span>
       </div>
-    </div>
+    </fieldset>
     <div class="mb-3">
       <button type="submit" id="form-submit-btn" class="btn btn-primary me-2">Register</button>
       <button type="reset" id="form-reset-btn" class="btn btn-danger">Reset</button>
