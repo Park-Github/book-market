@@ -1,9 +1,7 @@
 HELP.md
 .gradle
-build/resolvedMainClassName
-build/**/*.*
-!build/libs/*.*
-!gradle/wrapper/gradle-wrapper.jar
+build/
+!gradle/
 
 ### STS ###
 .apt_generated
