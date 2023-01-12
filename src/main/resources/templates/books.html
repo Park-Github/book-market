@@ -8,9 +8,24 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark">
+<!-- Navigation bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="/">Home</a>
+    <div class="row justify-content-start">
+      <a class="col navbar-brand" href="/">
+        <!--suppress CheckImageSize -->
+        <img src="/img/book.png" alt="Logo" width="35" height="35">
+      </a>
+      <div class="col navbar-nav">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link active" aria-current="page" href="/books">Books</a>
+        <a class="nav-link" href="#">Gallery</a>
+      </div>
+    </div>
+    <div class="navbar-nav d-flex justify-content-end">
+      <a class="nav-link" href="#">Log in</a>
+      <a class="nav-link" href="/member/register">Sign up</a>
+    </div>
   </div>
 </nav>
 
