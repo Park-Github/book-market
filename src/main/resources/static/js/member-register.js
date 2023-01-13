@@ -25,8 +25,9 @@ window.onload = function () {
  */
 function validateId(e) {
     let id_entry = e.target.value; // String
+    let valid = (id_entry.length >= 6);
 
-    if (id_entry.length <= 6) {
+    if (!valid) {
         changeValidity(input_id, false);
         id_feedback.innerText = (!id_entry) ? 'This field is empty!' : 'Too short id!';
         return;
