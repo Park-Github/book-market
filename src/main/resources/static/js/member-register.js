@@ -7,6 +7,7 @@ let button_submit;
  * This function will run once every DOM element is loaded
  * https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction
  */
+// TODO Replace with event listener
 window.onload = function () {
     input_id = document.getElementById('id');
     input_pwd = document.getElementById('pwd');
@@ -29,7 +30,7 @@ function validateId(e) {
 
     if (!valid) {
         changeValidity(input_id, false);
-        id_feedback.innerText = (!id_entry) ? 'This field is empty!' : 'Too short id!';
+        id_feedback.innerText = (!id_entry) ? 'This field is empty!' : 'Too short id! (6 characters or greater)';
         return;
     }
 
