@@ -22,8 +22,6 @@ public class HomeController {
 
         logger.info("Welcome home! The client locale is {}.", locale);
         model.addAttribute("serverTime", time);
-        model.addAttribute("greeting", "Welcome to BookMarket");
-        model.addAttribute("strapLine", "Welcome to Web Shopping Mall!");
         return "home";
     }
 
