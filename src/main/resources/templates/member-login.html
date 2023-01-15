@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/member-login.js"></script>
+    <title>Login</title>
+</head>
+<body>
+
+<nav th:insert="~{template :: navbar}"></nav>
+
+<div class="container-fluid bg-light p-5 mb-3">
+    <h2 class="text-center">Sign into your account</h2>
+</div>
+
+<div class="container mx-auto" style="max-width: 320px">
+    <form id="login-form" action="/member/login" method="post" class="mb-5">
+        <div class="mb-3">
+            <label class="form-label" for="id">ID</label>
+            <input class="form-control" type="text" id="id" name="id" aria-describedby="id-feedback" required>
+            <div id="id-feedback" class="invalid-feedback">Id not found!</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="pwd">Password</label>
+            <input class="form-control" type="password" id="pwd" name="password" aria-describedby="pwd-feedback" required>
+            <div id="pwd-feedback" class="invalid-feedback">Password not matching!</div>
+        </div>
+    </form>
+    <div class="d-grid mt-5 mb-3">
+        <button id="login-btn" class="btn btn-primary me-2">Login</button>
+    </div>
+</div>
+</body>
+</html>

@@ -29,7 +29,7 @@ class MemberServiceTest {
         member.setSex(Member.SEX_FEMALE);
         member.setResidence("Gyeonggi");
 
-        boolean isDuplicate = service.hasDuplicateID(member.getId());
+        boolean isDuplicate = service.exists(member.getId());
         assertThat(isDuplicate).isFalse();
         service.register(member);
     }

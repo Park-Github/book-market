@@ -10,36 +10,7 @@
 </head>
 <body>
 
-<!-- Navigation bar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <!--suppress CheckImageSize -->
-      <img src="/img/book.png" alt="Logo" width="35" height="35">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#side-nav"
-            aria-controls="side-nav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="side-nav" aria-labelledby="side-nav-title">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="side-nav-title">Navigation</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <div class="navbar-nav me-auto">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
-          <a class="nav-link" href="/books">Books</a>
-          <a class="nav-link" href="#">Gallery</a>
-        </div>
-        <div class="navbar-nav">
-          <a class="nav-link" href="#">Log in</a>
-          <a class="nav-link" href="/member/register">Sign up</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
+<nav th:insert="~{template :: navbar}"></nav>
 
 <div class="container-fluid bg-light p-5">
   <h2 class="text-center">List of Books</h2>

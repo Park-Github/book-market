@@ -3,14 +3,13 @@ package com.naver.idealproduction.bookmarket.repository;
 import com.naver.idealproduction.bookmarket.domain.Member;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
 public class MemoryMemberRepository implements MemberRepository {
 
     private final List<Member> memberList = new ArrayList<>();
+    private final Map<String, String> hashMap = new HashMap<>();
 
     @Override
     public void add(Member member) {
@@ -19,10 +18,20 @@ public class MemoryMemberRepository implements MemberRepository {
     }
 
     @Override
+    public void addPasswordHash(Member member, String hash) {
+        hashMap.put(member.getId(), hash);
+    }
+
+    @Override
     public Optional<Member> getOne(String id) {
         return memberList.stream()
                 .filter(m -> m.getId().equalsIgnoreCase(id))
                 .findAny();
+    }
+
+    @Override
+    public boolean matchHash(String id, String hash) {
+        return hash.equals(hashMap.get(id));
     }
 
 }
