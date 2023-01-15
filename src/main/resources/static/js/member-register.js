@@ -7,8 +7,7 @@ let button_submit;
  * This function will run once every DOM element is loaded
  * https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction
  */
-// TODO Replace with event listener
-window.onload = function () {
+window.addEventListener('load', () => {
     input_id = document.getElementById('id');
     input_pwd = document.getElementById('pwd');
     id_feedback = document.getElementById('id-feedback');
@@ -18,7 +17,7 @@ window.onload = function () {
     input_pwd.addEventListener('blur', e => validatePassword(e));
     button_reset.addEventListener('click', () => resetValidity());
     resetValidity();
-}
+});
 
 /**
  * Checks if input_id has valid and unique ID entry
