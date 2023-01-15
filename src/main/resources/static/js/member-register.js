@@ -61,7 +61,7 @@ function changeValidity(input, valid) {
     let remove = valid ? 'is-invalid' : 'is-valid';
     input.classList.add(add);
     input.classList.remove(remove);
-    input.innerText = 'This ID is already in use!'
+    id_feedback.innerText = 'This ID is already in use!'
     updateSubmitButton();
 }
 

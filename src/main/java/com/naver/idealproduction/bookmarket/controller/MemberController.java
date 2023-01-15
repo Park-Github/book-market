@@ -31,7 +31,7 @@ public class MemberController {
 
     @PostMapping("/register")
     public String submitRegisterForm(@ModelAttribute Member member) {
-        // TODO Register this member into database
+        service.register(member);
         return "redirect:/";
     }
 
