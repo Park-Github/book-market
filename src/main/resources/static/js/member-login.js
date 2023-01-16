@@ -1,31 +1,36 @@
+let form;
 let input_id;
 let input_pwd;
 let button_submit;
-let form;
 
-/**
- * This function will run once every DOM element is loaded
- * https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction
- */
 window.addEventListener('load', () => {
+    form = document.getElementById('login-form');
     input_id = document.getElementById('id');
     input_pwd = document.getElementById('pwd');
     button_submit = document.getElementById('login-btn');
-    form = document.getElementById('login-form');
     button_submit.addEventListener('click', () => onClick());
 });
 
-/**
- * Executes if user clicks 'Login' button
- */
 async function onClick() {
-    let id_match = await fetch_account(input_id);
-    let pwd_match = await fetch_account(input_pwd);
+    let id_valid = input_id.value;
+    let pwd_valid = input_pwd.value;
 
-    if (id_match && pwd_match) {
-        form.submit();
+    if (id_valid && pwd_valid) {
+        let id_match = await fetch_account(input_id);
+        let pwd_match = await fetch_account(input_pwd);
+
+        if (id_match && pwd_match) {
+            form.submit();
+        } else {
+            input_id.value = null;
+            input_pwd.value = null;
+            updateValidity(input_id, true);
+            updateValidity(input_pwd, true);
+            window.alert('Wrong id or password!');
+        }
     } else {
-        window.alert('Account not found!');
+        updateValidity(input_id, id_valid);
+        updateValidity(input_pwd, pwd_valid);
     }
 }
 
@@ -51,14 +56,28 @@ async function fetch_account(input) {
         default:
             throw new Error('Unknown type of input!');
     }
+
     let query = new URLSearchParams(param);
     let fetch_url = url + query;
     let response = await fetch(fetch_url);
 
-    if (!response.ok) {
+    if (response.ok) {
+        let text = await response.text();
+        return (text === 'true');
+    } else {
         throw new Error(`HTTP Error: ${response.status}`);
     }
+}
 
-    let text = await response.text();
-    return (text === 'true');
+/**
+ * Updates bootstrap validation styling
+ * @param input Input element
+ * @param valid Boolean value to determine if entry is valid or not
+ */
+function updateValidity(input, valid) {
+    if (valid) {
+        input.classList.remove('is-invalid');
+    } else {
+        input.classList.add('is-invalid');
+    }
 }
