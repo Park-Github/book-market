@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="~{template :: header}"></th:block>
+<body>
+
+<th:block th:insert="~{template :: navbar}"></th:block>
+
+<div class="container-fluid bg-light p-5 mb-3">
+    <h2 class="text-center">Account profile</h2>
+</div>
+
+<div class="container mx-auto" style="max-width: 320px">
+    <form id="profile-form" action="/member/profile" method="post" class="mb-5">
+        <div class="mb-3">
+            <label class="form-label" for="id">ID</label>
+            <input class="form-control bg-light" type="text" id="id" name="id" th:value="${member.id}" readonly>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="pwd">Password</label>
+            <input class="form-control" type="password" id="pwd" name="password" placeholder="New password if desired">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="res">Residence</label>
+            <input class="form-control" type="text" id="res" name="residence" th:value="${member.residence}" maxlength="64">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="sex">Sex</label>
+            <select id="sex" class="form-select" name="sex">
+                <option th:selected="${member.sex} == 0" value="0">Male</option>
+                <option th:selected="${member.sex} == 1" value="1">Female</option>
+                <option th:selected="${member.sex} == 2" value="2">Other</option>
+            </select>
+        </div>
+        <fieldset class="border bg-light mt-4 mb-4 p-3">
+            <h6>Hobby</h6>
+            <div>
+                <span class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="reading" name="hobbies" value="reading"
+                           th:checked="${member.hobbies.contains('reading')}">
+                    <label class="form-check-label" for="reading">Reading</label>
+                </span>
+                <span class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="exercise" name="hobbies" value="exercise"
+                            th:checked="${member.hobbies.contains('exercise')}">
+                    <label class="form-check-label" for="exercise">Exercise</label>
+                </span>
+                <span class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="gaming" name="hobbies" value="gaming"
+                            th:checked="${member.hobbies.contains('gaming')}">
+                    <label class="form-check-label" for="gaming">Gaming</label>
+                </span>
+            </div>
+        </fieldset>
+        <div class="d-grid mt-5 mb-3">
+            <input type="submit" class="btn btn-primary me-2" value="Save">
+        </div>
+    </form>
+</div>
+
+<th:block th:insert="~{template :: footer}"></th:block>
+
+</body>
+</html>

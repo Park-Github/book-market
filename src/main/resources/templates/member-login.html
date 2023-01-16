@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/member-login.js"></script>
-    <title>Login</title>
-</head>
+<th:block th:insert="~{template :: header}"></th:block>
+<script src="/js/member-login.js"></script>
 <body>
 
-<nav th:insert="~{template :: navbar}"></nav>
+<th:block th:insert="~{template :: navbar}"></th:block>
 
 <div class="container-fluid bg-light p-5 mb-3">
     <h2 class="text-center">Sign into your account</h2>
@@ -33,5 +27,8 @@
         <button id="login-btn" class="btn btn-primary me-2">Login</button>
     </div>
 </div>
+
+<th:block th:insert="~{template :: footer}"></th:block>
+
 </body>
 </html>

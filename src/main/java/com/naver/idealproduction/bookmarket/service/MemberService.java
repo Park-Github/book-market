@@ -2,8 +2,11 @@ package com.naver.idealproduction.bookmarket.service;
 
 import com.naver.idealproduction.bookmarket.domain.Member;
 import com.naver.idealproduction.bookmarket.repository.MemberRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
@@ -21,11 +24,53 @@ public class MemberService {
         this.repository = repository;
     }
 
+    public Optional<Member> getMember(HttpSession session) {
+        String id = (String) session.getAttribute("member-id");
+        return repository.getOne(id);
+    }
+
+    public Optional<Member> getMember(String id) {
+        return repository.getOne(id);
+    }
+
+    public void supplyModelAttribute(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        Member member = null;
+
+        if (session != null) {
+            member = getMember(session).orElse(null);
+            if (member == null) {
+                session.invalidate();
+            }
+        }
+        model.addAttribute("member", member);
+    }
+
     public void register(Member member) {
         repository.add(member);
         String password = member.getPassword();
         String hash = produceHash(password);
-        repository.addPasswordHash(member, hash);
+        repository.addPasswordHash(member.getId(), hash);
+    }
+
+    public void updateProfile(Member member) {
+        String id = member.getId();
+        Member pastEntry = repository.getOne(id).orElse(null);
+
+        if (pastEntry == null) {
+            throw new IllegalArgumentException("Member not registered: " + member.getId());
+        }
+
+        if (member.getPassword().isBlank()) {
+            member.setPassword(pastEntry.getPassword());
+        } else {
+            String hash = produceHash(member.getPassword());
+            repository.removePasswordHash(id);
+            repository.addPasswordHash(id, hash);
+        }
+
+        repository.remove(pastEntry);
+        repository.add(member);
     }
 
     public boolean exists(String id) {

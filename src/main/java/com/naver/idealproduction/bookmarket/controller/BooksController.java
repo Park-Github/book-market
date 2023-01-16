@@ -2,6 +2,8 @@ package com.naver.idealproduction.bookmarket.controller;
 
 import com.naver.idealproduction.bookmarket.domain.Book;
 import com.naver.idealproduction.bookmarket.service.BookService;
+import com.naver.idealproduction.bookmarket.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,34 +19,44 @@ import java.util.Map;
 @RequestMapping("/books")
 public class BooksController {
 
-    private final BookService service;
+    private final BookService bookService;
+    private final MemberService memberService;
 
     @Autowired
-    public BooksController(BookService service) {
-        this.service = service;
+    public BooksController(BookService bookService, MemberService memberService) {
+        this.bookService = bookService;
+        this.memberService = memberService;
     }
 
     @GetMapping
-    public String getBooks(Model model) {
-        List<Book> list = service.getAllBooks();
+    public String getBooks(HttpServletRequest request, Model model) {
+        List<Book> list = bookService.getAllBooks();
         model.addAttribute("bookList", list);
+        memberService.supplyModelAttribute(request, model);
         return "books";
     }
 
     @GetMapping("/{category}")
-    public String getBooksByCategory(@PathVariable("category") String category, Model model) {
-        List<Book> list = service.getBooks(category);
+    public String getBooksByCategory(
+            @PathVariable("category") String category,
+            HttpServletRequest request,
+            Model model
+    ) {
+        List<Book> list = bookService.getBooks(category);
         model.addAttribute("bookList", list);
+        memberService.supplyModelAttribute(request, model);
         return "books";
     }
 
     @GetMapping("/filter")
     public String getBooksByFilter(
             @MatrixVariable Map<String, List<String>> filter,
+            HttpServletRequest request,
             Model model
     ) {
-        List<Book> list = service.getBooks(filter);
+        List<Book> list = bookService.getBooks(filter);
         model.addAttribute("bookList", list);
+        memberService.supplyModelAttribute(request, model);
         return "books";
     }
 

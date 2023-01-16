@@ -18,8 +18,18 @@ public class MemoryMemberRepository implements MemberRepository {
     }
 
     @Override
-    public void addPasswordHash(Member member, String hash) {
-        hashMap.put(member.getId(), hash);
+    public void remove(Member member) {
+        memberList.remove(member);
+    }
+
+    @Override
+    public void addPasswordHash(String id, String hash) {
+        hashMap.put(id, hash);
+    }
+
+    @Override
+    public void removePasswordHash(String id) {
+        hashMap.remove(id);
     }
 
     @Override
