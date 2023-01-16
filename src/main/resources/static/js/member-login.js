@@ -8,10 +8,15 @@ window.addEventListener('load', () => {
     input_id = document.getElementById('id');
     input_pwd = document.getElementById('pwd');
     button_submit = document.getElementById('login-btn');
-    button_submit.addEventListener('click', () => onClick());
+    input_pwd.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            onLogin().then();
+        }
+    });
+    button_submit.addEventListener('click', () => onLogin());
 });
 
-async function onClick() {
+async function onLogin() {
     let id_valid = input_id.value;
     let pwd_valid = input_pwd.value;
 
