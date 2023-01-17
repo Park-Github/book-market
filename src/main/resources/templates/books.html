@@ -37,7 +37,7 @@
 
 <div class="container">
   <div class="row" style="justify-content: center">
-    <div th:each="book : ${bookList}" class="col-md-4">
+    <div th:each="book : ${bookList}" class="col-md-4"> <!-- todo list만 넘기자 -->
       <h3 id="name" th:text="${#strings.abbreviate(book.name, 30)}"></h3>
       <p>
         [(${book.author})]<br>
