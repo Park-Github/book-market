@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <script src="/js/bootstrap.bundle.min.js"></script>
   <script src="/js/member-register.js"></script>
   <title>Create an account</title>
 </head>
@@ -11,70 +13,76 @@
 <!-- Navigation bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <div class="row justify-content-start">
-      <a class="col navbar-brand" href="/">
-        <!--suppress CheckImageSize -->
-        <img src="/img/book.png" alt="Logo" width="35" height="35">
-      </a>
-      <div class="col navbar-nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/books">Books</a>
-        <a class="nav-link" href="#">Gallery</a>
+    <a class="navbar-brand" href="/">
+      <!--suppress CheckImageSize -->
+      <img src="/img/book.png" alt="Logo" width="35" height="35">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#side-nav"
+            aria-controls="side-nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="side-nav" aria-labelledby="side-nav-title">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="side-nav-title">Navigation</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="navbar-nav me-auto">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link" href="/books">Books</a>
+          <a class="nav-link" href="#">Gallery</a>
+        </div>
+        <div class="navbar-nav">
+          <a class="nav-link" href="#">Log in</a>
+          <a class="nav-link" href="/member/register">Sign up</a>
+        </div>
       </div>
     </div>
   </div>
 </nav>
 
-<div class="container-fluid bg-light p-5 mb-4">
-  <div class="container">
-    <h1 class="display-3">New account</h1>
-  </div>
+<div class="container-fluid p-4 bg-light mb-2">
+    <h2 class="text-center">New account</h2>
 </div>
 
-<div class="container">
-  <form action="/member/register" method="post">
+<div class="container mx-auto" style="max-width: 320px">
+  <form action="/member/register" method="post" class="mb-5">
     <div class="mb-3">
       <label class="col-form-label" for="id">ID</label>
-      <div class="col-sm-3">
-        <input class="form-control" type="text" id="id" name="id" aria-describedby="id-feedback" required>
-        <div id="id-feedback" class="invalid-feedback"></div>
-      </div>
+      <input class="form-control" type="text" id="id" name="id" aria-describedby="id-feedback" required>
+      <div id="id-feedback" class="invalid-feedback"></div>
     </div>
     <div class="mb-3">
       <label class="col-form-label" for="pwd">Password</label>
-      <div class="col-sm-3">
-        <input class="form-control" type="password" id="pwd" name="password" required>
-        <div class="invalid-feedback">Too short password!</div>
-      </div>
+      <input class="form-control" type="password" id="pwd" name="password" required>
+      <div class="invalid-feedback">Too short password! (6 characters or greater)</div>
     </div>
     <div class="mb-3">
       <label class="col-form-label" for="res">Residence</label>
-      <div class="col-sm-3">
-        <select class="form-select" id="res" name="residence" required>
-            <option value="">Select your region</option>
-          <optgroup label="City">
-            <option>Seoul</option>
-            <option>Busan</option>
-            <option>Daegu</option>
-            <option>Incheon</option>
-            <option>Gwangju</option>
-            <option>Daejeon</option>
-            <option>Ulsan</option>
-            <option>Sejong</option>
-          </optgroup>
-          <optgroup label="Province">
-            <option>Gyeonggi</option>
-            <option>Gangwon</option>
-            <option>North. Chungcheong</option>
-            <option>South. Chungcheong</option>
-            <option>North. Jeolla</option>
-            <option>South. Jeolla</option>
-            <option>North. Gyeongsang</option>
-            <option>South. Gyeongsang</option>
-            <option>Jeju</option>
-          </optgroup>
-        </select>
-      </div>
+      <select class="form-select" id="res" name="residence" required>
+        <option value="">Select your region</option>
+        <optgroup label="City">
+          <option>Seoul</option>
+          <option>Busan</option>
+          <option>Daegu</option>
+          <option>Incheon</option>
+          <option>Gwangju</option>
+          <option>Daejeon</option>
+          <option>Ulsan</option>
+          <option>Sejong</option>
+        </optgroup>
+        <optgroup label="Province">
+          <option>Gyeonggi</option>
+          <option>Gangwon</option>
+          <option>North. Chungcheong</option>
+          <option>South. Chungcheong</option>
+          <option>North. Jeolla</option>
+          <option>South. Jeolla</option>
+          <option>North. Gyeongsang</option>
+          <option>South. Gyeongsang</option>
+          <option>Jeju</option>
+        </optgroup>
+      </select>
     </div>
     <div class="mb-3">
       <label class="mb-1">Sex</label>
@@ -93,10 +101,10 @@
       </span>
       </div>
     </div>
-    <fieldset class="border bg-light mb-3 col-sm-3">
-      <legend class="ms-1 fs-6">Optional field</legend>
-      <label class="ms-3 mb-1">Hobby</label>
-      <div class="ms-3">
+    <fieldset class="border bg-light mt-5 mb-5 p-3">
+      <h5 class="text-center">Optional field</h5>
+      <h6>Hobby</h6>
+      <div>
         <span class="form-check form-check-inline">
           <input class="form-check-input" type="checkbox" id="reading" name="hobbies" value="reading">
           <label class="form-check-label" for="reading">Reading</label>

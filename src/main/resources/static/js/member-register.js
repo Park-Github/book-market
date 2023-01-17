@@ -7,7 +7,7 @@ let button_submit;
  * This function will run once every DOM element is loaded
  * https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction
  */
-window.onload = function () {
+window.addEventListener('load', () => {
     input_id = document.getElementById('id');
     input_pwd = document.getElementById('pwd');
     id_feedback = document.getElementById('id-feedback');
@@ -17,7 +17,7 @@ window.onload = function () {
     input_pwd.addEventListener('blur', e => validatePassword(e));
     button_reset.addEventListener('click', () => resetValidity());
     resetValidity();
-}
+});
 
 /**
  * Checks if input_id has valid and unique ID entry
@@ -25,10 +25,11 @@ window.onload = function () {
  */
 function validateId(e) {
     let id_entry = e.target.value; // String
+    let valid = (id_entry.length >= 6);
 
-    if (id_entry.length <= 6) {
+    if (!valid) {
         changeValidity(input_id, false);
-        id_feedback.innerText = (!id_entry) ? 'This field is empty!' : 'Too short id!';
+        id_feedback.innerText = (!id_entry) ? 'This field is empty!' : 'Too short id! (6 characters or greater)';
         return;
     }
 
@@ -60,7 +61,7 @@ function changeValidity(input, valid) {
     let remove = valid ? 'is-invalid' : 'is-valid';
     input.classList.add(add);
     input.classList.remove(remove);
-    input.innerText = 'This ID is already in use!'
+    id_feedback.innerText = 'This ID is already in use!'
     updateSubmitButton();
 }
 
