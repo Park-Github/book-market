@@ -1,10 +1,9 @@
-class PageName extends HTMLElement {
+class PageInfo extends HTMLElement {
     constructor() {
         super();
 
-        const id = 'link-' + this.innerText.toLowerCase();
-        let a = document.getElementById(id);
-        this.innerText = null;
+        let name = this.getAttribute('name').toLowerCase();
+        const a = document.getElementById('link-' + name);
 
         if (a) {
             a.classList.add('active');
@@ -24,5 +23,5 @@ window.addEventListener('load', () => {
             logout_form.submit();
         });
     }
-    customElements.define('page-name', PageName);
+    customElements.define('page-info', PageInfo);
 });
