@@ -3,10 +3,6 @@ let input_pwd;
 let id_feedback;
 let button_submit;
 
-/**
- * This function will run once every DOM element is loaded
- * https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction
- */
 window.addEventListener('load', () => {
     input_id = document.getElementById('id');
     input_pwd = document.getElementById('pwd');
@@ -21,7 +17,6 @@ window.addEventListener('load', () => {
 
 /**
  * Checks if input_id has valid and unique ID entry
- * and change form validity accordingly.
  */
 function validateId(e) {
     let id_entry = e.target.value; // String
@@ -48,7 +43,6 @@ function validateId(e) {
 
 /**
  * Checks if input_pwd has valid PASSWORD entry
- * and change form validity accordingly.
  */
 function validatePassword(e) {
     let value = e.target.value;
@@ -56,6 +50,11 @@ function validatePassword(e) {
     changeValidity(input_pwd, valid);
 }
 
+/**
+ * Updates bootstrap validation styling
+ * @param input Input element
+ * @param valid Boolean value to determine if entry is valid or not
+ */
 function changeValidity(input, valid) {
     let add = valid ? 'is-valid' : 'is-invalid';
     let remove = valid ? 'is-invalid' : 'is-valid';
@@ -65,12 +64,18 @@ function changeValidity(input, valid) {
     updateSubmitButton();
 }
 
+/**
+ * Resets bootstrap validation styling
+ */
 function resetValidity() {
     input_id.classList.remove('is-valid', 'is-invalid');
     input_pwd.classList.remove('is-valid', 'is-invalid');
     updateSubmitButton();
 }
 
+/**
+ * Updates bootstrap styling for submit button
+ */
 function updateSubmitButton() {
     let id_valid = input_id.classList.contains('is-valid');
     let pwd_valid = input_pwd.classList.contains('is-valid');

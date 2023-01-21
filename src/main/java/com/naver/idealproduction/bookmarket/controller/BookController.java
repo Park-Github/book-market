@@ -2,6 +2,8 @@ package com.naver.idealproduction.bookmarket.controller;
 
 import com.naver.idealproduction.bookmarket.domain.Book;
 import com.naver.idealproduction.bookmarket.service.BookService;
+import com.naver.idealproduction.bookmarket.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -15,22 +17,29 @@ import java.util.Optional;
 @Controller
 public class BookController {
 
-    private final BookService service;
+    private final BookService bookService;
+    private final MemberService memberService;
 
     @Autowired
-    public BookController(BookService service) {
-        this.service = service;
+    public BookController(BookService bookService, MemberService memberService) {
+        this.bookService = bookService;
+        this.memberService = memberService;
     }
 
     @GetMapping("/book")
-    public String getBookByID(@RequestParam String id, Model model) {
-        Optional<Book> book = service.getBook(id);
+    public String getBookByID(
+            @RequestParam String id,
+            HttpServletRequest request,
+            Model model
+    ) {
+        Optional<Book> book = bookService.getBook(id);
 
         if (book.isEmpty()) {
             throw new ErrorResponseException(HttpStatus.NOT_FOUND);
         }
 
         model.addAttribute("book", book.get());
+        memberService.supplyModelAttribute(request, model);
         return "book";
     }
 
