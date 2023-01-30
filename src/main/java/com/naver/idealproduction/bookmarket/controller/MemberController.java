@@ -5,19 +5,17 @@ import com.naver.idealproduction.bookmarket.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
 
     private final MemberService service;
+    public static Member mem = null;
 
     @Autowired
     public MemberController(MemberService service) {
@@ -25,7 +23,8 @@ public class MemberController {
     }
 
     @GetMapping("/register")
-    public String getRegisterForm() {
+    public String getRegisterForm(HttpServletRequest request, Model model) {
+        service.supplyModelAttribute(request, model);
         return "member-register";
     }
 
@@ -36,58 +35,34 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public String getLoginForm() {
+    public String getLoginForm(HttpServletRequest request, Model model) {
+        service.supplyModelAttribute(request, model);
         return "member-login";
     }
 
     @PostMapping("/login")
-    public String submitLoginForm(
-            HttpServletRequest request,
-            @RequestParam("id") String id,
-            @RequestParam("password") String password
-    ) {
-        if (!service.exists(id)) {
-            throw new ErrorResponseException(HttpStatus.NOT_FOUND);
+    public String submitLoginForm(@RequestParam(value = "id") String id,
+                                  @RequestParam(value = "password") String password,
+                                  HttpServletRequest request) {
+        if (service.matchPassword(id, password)) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("member-id", id);
         }
 
-        if (!service.matchPassword(id, password)) {
-            throw new ErrorResponseException(HttpStatus.UNAUTHORIZED);
-        }
-
-        HttpSession session = request.getSession();
-        session.setAttribute("member-id", id);
         return "redirect:/";
     }
 
     @GetMapping("/profile")
-    public String getProfile(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession(false);
-        Member member = null;
-
-        if (session != null) {
-            member = service.getMember(session).orElse(null);
-        }
-
-        if (member == null) {
-            if (session != null) {
-                session.invalidate();
-            }
-            return "redirect:/";
-        }
-
-        model.addAttribute("member", member);
+    public String getProfileForm(HttpServletRequest request, Model model) {
+        service.supplyModelAttribute(request, model);
         return "member-profile";
     }
 
     @PostMapping("/profile")
     public String submitProfileForm(@ModelAttribute Member member) {
-        Optional<Member> pastEntry = service.getMember(member.getId());
-
-        if (pastEntry.isEmpty()) {
-            throw new ErrorResponseException(HttpStatus.GONE);
-        }
-
+        String id = member.getId();
         service.updateProfile(member);
+        mem = service.getMember(id).orElse(null);
         return "redirect:/";
     }
 
